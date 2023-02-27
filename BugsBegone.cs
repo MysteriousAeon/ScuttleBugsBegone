@@ -1,44 +1,26 @@
 ﻿using MelonLoader;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ScuttleBugsBegone
 {
     public class BugsBegone : MelonMod
     {
-        private GameObject bugsGameObject;
-        private bool bugsGameObjectPresent = false;
         public override void OnInitializeMelon()
         {
             LoggerInstance.Msg("ScuttleBugsBegone loaded!");
-        }
-        public override void OnUpdate()
-        {
-            // Check if the "Bugs" gameobject is present
-            if (bugsGameObject == null)
+            System.Action<Scene, LoadSceneMode> scneneLoaded = (s, s1) =>
             {
-                bugsGameObject = GameObject.Find("Bugs");
-                if (bugsGameObject == null)
+                if (s.name.Equals("GameCore"))
                 {
-                    bugsGameObjectPresent = false;
-                    return;
+                    var patchCoop = Resources.FindObjectsOfTypeAll<GameObject>().First(x => x.name.Equals("patchCoop"));
+                    var Bugs = patchCoop.transform.GetChild(4).GetChild(10).transform;
+                    Bugs.gameObject.SetActive(false);
+                    Bugs.transform.localScale = Vector3.zero;
                 }
-                else
-                {
-                    bugsGameObjectPresent = true;
-                }
-            }
-            else
-            {
-                bugsGameObjectPresent = true;
-            }
-
-            // Clean the grass if the "Bugs" gameobject is present
-            if (bugsGameObjectPresent)
-            {
-                Transform bug = GameObject.Find("Bugs").GetComponent<Transform>();
-                bug.localScale = new Vector3(-1000, -1000, -1000);
-                bug.forward = new Vector3(-1, -1, -1);
-            }
+            };
+            SceneManager.add_sceneLoaded(scneneLoaded);
         }
     }
 }
