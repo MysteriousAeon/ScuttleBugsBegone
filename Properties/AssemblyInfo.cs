@@ -15,7 +15,7 @@ using ScuttleBugsBegone;
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: MelonInfo(typeof(BugsBegone), "ScuttleBugsBegone", "1.0.0", "MysteriousAeon", "https://www.nexusmods.com/slimerancher2/mods/28")]
+[assembly: MelonInfo(typeof(BugsBegone), "ScuttleBugsBegone", "2.0.0", "MysteriousAeon & KomiksPL", "https://www.nexusmods.com/slimerancher2/mods/28")]
 [assembly: MelonGame("MonomiPark", "SlimeRancher2")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
